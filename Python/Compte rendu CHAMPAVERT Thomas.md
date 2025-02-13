@@ -755,7 +755,7 @@ fin=15 #taille de la suite
 for i in range(2,fin):
     x=fibbo[i-1]+fibbo[i-2]
     fibbo=fibbo+[x]
-    rapport_fibbo=rapport_fibbo+[fibbo[i]/fibbo[i-1]]
+    rapport_fibbo.append(fibbo[i]/fibbo[i-1])
 
 print(fibbo)
 print(rapport_fibbo)
@@ -867,10 +867,7 @@ for i in liste:
     elif i=="G":
         g=g+1
 
-print(f"fréquence A:{a/len(liste):0.2f}")
-print(f"fréquence R:{r/len(liste):0.2f}")
-print(f"fréquence W:{w/len(liste):0.2f}")
-print(f"fréquence G:{g/len(liste):0.2f}")
+print(f"fréquence A:{a/len(liste):0.2f}\nfréquence R:{r/len(liste):0.2f}\nfréquence W:{w/len(liste):0.2f}\nfréquence G:{g/len(liste):0.2f}")
 ```
 
 On obtient:
@@ -890,9 +887,9 @@ On réalise le programme suivant:
 liste=[14,9,13,15,12]
 
 moyenne=sum(liste)/len(liste)
-print(f"note max:{max(liste)}")
-print(f"note min:{min(liste)}")
-print(f"moyenne:{moyenne:0.2f}")
+print(f"note max:{max(liste)}\nnote min:{min(liste)}\nmoyenne:{moyenne:0.2f}")
+#print(f"note min:{min(liste)}")
+#print(f"moyenne:{moyenne:0.2f}")
 
 if 10<moyenne and moyenne<12:
     print("mention passable")
@@ -922,9 +919,9 @@ liste_pair=[]
 liste_impair=[]
 for i in liste:
     if i%2==0 and i<10:
-        liste_pair=liste_pair+[i]
+        liste_pair.append(i)
     elif i%2!=0 and i>10:
-        liste_impair=liste_impair+[i]
+        liste_impair.append(i)
 print(liste_pair)
 print(liste_impair)
 ```
@@ -1254,7 +1251,7 @@ for i in range (N):
 print(4*n/N)
 ```
 
-## 8)Fonctions
+## 9)Fonctions
 
 ### Puissance
 
@@ -1279,7 +1276,7 @@ def pyramide(n):
         print(("*"*(2*i))+"*")
 
 reponse = input (" Entrez un nombre de lignes ( entier positif ): ")
-N = int ( reponse )
+N = int ( reponse ) #nombre de lignes de la pyramide
 
 pyramide(N)
 ```
@@ -1338,8 +1335,8 @@ On réalise le programme suivant:
 ```py
 import math
 
-def calc_dist(a,b):
-    return math.sqrt((B[0]-A[0])**2+((B[1]-A[1]))**2+(B[2]-A[2])**2)
+def calc_dist_3D(a,b): #retourne la distance à l'origine d'un vecteur en 3dimensions
+    return math.sqrt((b[0]-a[0])**2+((b[1]-a[1]))**2+(b[2]-a[2])**2)
 
 A=[0,0,0]
 B=[1,1,1]
@@ -1356,7 +1353,7 @@ import random
 def gen_distrib(debut,fin,n):
     liste=[]
     for i in range(n):
-        liste.append(random.uniform(debut,fin))
+        liste.append(random.uniform(debut,fin)) #ajoute à la liste une valeur aléatoire entre devut et fin
     return liste
 
 def calc_stat(liste2):
@@ -1366,6 +1363,47 @@ for i in range(1,21):
     liste_x=gen_distrib(0,100,20)
     mini,maxi,avg=calc_stat(liste_x)
     print(f"liste {i:>2}: min={mini:0.2f}; max={maxi:0.2f}; moyenne={avg:0.2f}")
+```
+
+### distance à l'origine (programme non fonctionnel)
+
+On réalise le programme suivant:
+
+```py
+import math
+import matplotlib.pyplot as plt
+
+def calc_dist_2D(a,b):                
+    return math.sqrt((b[0]-a[0])**2+((b[1]-a[1]))**2)#retourne la distance à l'origine
+
+def calc_dist2ori(list_x,list_y):
+    distance=[]
+    for i in range (len(list_x)):
+        distance.append(calc_dist_2D(list_x[i],list_y[i]))
+    return distance
+
+x=[]
+y=[]
+
+for i in range(-50,51):
+    x.append(i)
+    y.append(math.sin(i))
+
+distance_ori=calc_dist2ori(x,y)
+
+with open("coords.dat","w") as f_out:
+    for i in range(len(x)):
+        f_out.write(f_out.write(f"{x[i]} {y[i]} {distance_ori[i]}\n"))
+```
+
+## 10)Fonctions
+
+### Puissance
+
+On réalise le programme suivant:
+
+```py
+
 ```
 
 ## Oscilloscope
